@@ -1,0 +1,46 @@
+{
+    "name": "dudebro",
+    "version": "0.0.1",
+    "description": "An experimental Discord bot which acts as the dispatcher for fuel rescue (fuel rat) missions in Elite: Dangerous.",
+    "author": {
+        "name": "Melvin Pearlmutter",
+        "email": "jpearlmutter95@gmail.com"
+    },
+    "contributors": [{
+        "name": "Resi Respati",
+        "email": "resir014@gmail.com"
+    }],
+    "bin": "./bin/dudebro",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SPACE-DUDES/dudebro"
+    },
+    "bugs": {
+        "url": "https://github.com/SPACE-DUDES/dudebro/issues"
+    },
+    "keywords": [
+        "discord bot",
+        "fuel rats",
+        "fuel rescue",
+        "automated",
+        "dispatcher",
+        "dispatch"
+    ],
+    "dependencies": {
+        "discord.io": "*"
+    },
+    "devDependencies": {
+        "eslint": "*",
+        "jslint": "*"
+    },
+    "preferGlobal": false,
+    "private": true,
+    "publishConfig": {
+        "registry": "maybe later"
+    },
+    "analyze": true,
+    "license": "MIT"
+}
