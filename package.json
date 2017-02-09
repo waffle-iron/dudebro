@@ -34,7 +34,7 @@
     },
     "devDependencies": {
         "eslint": "*",
-        "jslint": "*"
+        "jshint": "*"
     },
     "preferGlobal": false,
     "private": true,
