@@ -1,0 +1,80 @@
+console.log("======== dudebro v0.0.1 build 56 ========");
+
+/*
+  A ping pong bot, whenever you send "ping", it replies "pong".
+*/
+
+// import the discord.js module
+const Discord = require('discord.js');
+
+// create an instance of a Discord Client, and call it client
+const client = new Discord.Client();
+
+// the token of your bot - https://discordapp.com/developers/applications/me
+const token = 'Mjc4Njc1ODk1OTE5ODM3MTg1.C35PYA.pEtvYLayyHQXmtpo5PEL_Fid2GU';
+
+// the ready event is vital, it means that your bot will only start reacting to information
+// from Discord _after_ ready is emitted.
+client.on('ready', () => {
+    console.log('I am ready!');
+
+});
+
+// ================ Custom Functions ================ //
+
+function reply(message, text) {
+    try {
+        message.channel.sendMessage('**<@!' + message.member.id + '>:** ' + text);
+        console.log('@' + message.member.id + ': ' + text);
+    } catch (error) {
+        message.channel.sendMessage("Whoops! That didn't work. Here's the error shenanigans:\n\n" + error + "\n\nCC <@!" + message.member.id + ">");
+    }
+}
+
+// =============== Bot Event Listener =============== //
+
+// create an event listener for messages
+client.on('message', message => {
+
+    try {
+        // if the message is "ping",
+        if (message.content === 'ping') {
+            // send "pong" to the same channel.
+            reply(message, "pong! :ping_pong:");
+        }
+
+        if (message.content === "roleID()") {
+            console.log(message.guild.roles);
+            reply(message, "Check the console log for the roles and their IDs.");
+        }
+
+        if (message.content === "/register") {
+            message.member.setRoles({ id: 278599947677466624, name: "Fuel Dudes" });
+        }
+
+        if (message.content === 'isRegisteredPilot()') {
+            registered = message.member.roles.exists("name", "Fuel Dudes");
+            if (registered) reply(message, "You are registered as a Fuel Dude pilot! :smile:");
+            if (!registered) reply(message, "You are not registered as a Fuel Dude pilot. :frowning2:")
+        }
+
+        if (message.content.startsWith === 'getNick(') {
+            id = message.content.slice(0, 8);
+            last = id.indexOf(")");
+            console.log(id);
+            id = slice(last - 1, last);
+            console.log(id);
+            reply(message, "That ID belongs to <@!" + id + ">");
+        }
+
+        if (message.content === "goodbye()") {
+            reply(message, ":wave:");
+            client.destroy();
+        }
+    } catch (error) {
+        message.channel.sendMessage("Whoops! That didn't work. Here's the error shenanigans:\n\n" + error + "\n\nCC <@!" + message.member.id + ">");
+    }
+});
+
+// log our bot in
+client.login(token);
