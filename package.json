@@ -30,7 +30,7 @@
         "dispatch"
     ],
     "dependencies": {
-        "discord.io": "*"
+        "discord.js": "*"
     },
     "devDependencies": {
         "eslint": "*",
