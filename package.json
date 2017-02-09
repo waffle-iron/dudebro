@@ -30,7 +30,8 @@
         "dispatch"
     ],
     "dependencies": {
-        "discord.js": "*"
+        "discord.js": "11.0.0",
+        "config-js": "1.1.9"
     },
     "devDependencies": {
         "eslint": "*",
