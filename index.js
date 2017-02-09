@@ -1,4 +1,4 @@
-console.log("======== dudebro v0.0.1 build 56 ========");
+console.log("======== dudebro v0.0.1 build 62 ========");
 
 /*
   A ping pong bot, whenever you send "ping", it replies "pong".
@@ -16,8 +16,7 @@ const token = 'Mjc4Njc1ODk1OTE5ODM3MTg1.C35PYA.pEtvYLayyHQXmtpo5PEL_Fid2GU';
 // the ready event is vital, it means that your bot will only start reacting to information
 // from Discord _after_ ready is emitted.
 client.on('ready', () => {
-    console.log('I am ready!');
-
+    console.log('Connection to Discord established.');
 });
 
 // ================ Custom Functions ================ //
@@ -49,7 +48,10 @@ client.on('message', message => {
         }
 
         if (message.content === "/register") {
-            message.member.setRoles({ id: 278599947677466624, name: "Fuel Dudes" });
+            let fuelDudes = message.guild.roles.find("name", "Fuel Dudes");
+            //message.member.setRoles({ id: 278599947677466624, name: "Fuel Dudes" });
+            //message.member.setRoles(role).catch(log.console);
+            message.member.addRole(fuelDudes);
         }
 
         if (message.content === 'isRegisteredPilot()') {
@@ -67,7 +69,7 @@ client.on('message', message => {
             reply(message, "That ID belongs to <@!" + id + ">");
         }
 
-        if (message.content === "goodbye()") {
+        if (message.content === "logout()") {
             reply(message, ":wave:");
             client.destroy();
         }
