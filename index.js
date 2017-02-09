@@ -54,7 +54,7 @@ function busy(isBusy) {
     } else {
         idleTime = null;
     };
-    
+
     client.setPresence({
         idle_since: idleTime
     });
@@ -75,22 +75,22 @@ function dispatchTransition() {
 }
 
 function dudeLogin(userID) {
-    for(var i = 0; i < standbyList.length; i++) {
+    for (var i = 0; i < standbyList.length; i++) {
         console.log(standbyList[i]);
         if (standbyList[i] === userID) return "You\'re already on duty!";
     };
     standbyList.push(userID);
-    return("You are now set as **on-duty**.");
+    return ("You are now set as **on-duty**.");
 }
 
 function dudeLogout(userID) {
-    for(var i = 0; i < standbyList.length; i++) {
+    for (var i = 0; i < standbyList.length; i++) {
         if (standbyList[i] === userID) {
             standbyList.splice(i, i + 1);
-            return("You are now set as **off-duty**.");
+            return ("You are now set as **off-duty**.");
         };
     };
-    return("You\'re already off duty!");
+    return ("You\'re already off duty!");
 };
 
 // ================ BOT HANDLING ================ //
@@ -115,10 +115,10 @@ client.on('disconnect', function(errMsg, code) {
 
 client.on('message', function(user, userID, channelID, message, event) {
     // dispatch program
-    
+
     // initial prompt to get the user started.
     if (channelID === '277698627793584128') {
-        
+
         // ---------------- INFO COLLECTION ---------------- //
         if (message === 'help' && fuelClientState === null) { // null check so that this message won't display more than once per session
             fuelClientState = 1;
@@ -127,7 +127,7 @@ client.on('message', function(user, userID, channelID, message, event) {
             reply(channelID, userID, statement);
             busy(true);
         };
-        
+
         if (userID === fuelClientID && fuelClientState === 1) {
             // name updater and system prompt
             if (message.startsWith("CMDR ")) {
@@ -144,7 +144,7 @@ client.on('message', function(user, userID, channelID, message, event) {
             // system updater and platform prompt
             if (message.endsWith(" system") && userID === fuelClientID) {
                 endSlice = message.lastIndexOf(" system");
-                message = message.slice(0,endSlice);
+                message = message.slice(0, endSlice);
                 if (fuelClientSystem === null) {
                     statement = 'I have noted your system as **' + message + '**! If that doesn\'t look right, please send it again.\n\nNext, I need to know which platform you\'re playing on. Respond with either `pc`, `ps4` or `xbox` to let me know!';
                 } else {
@@ -191,11 +191,11 @@ client.on('message', function(user, userID, channelID, message, event) {
 
         // ---------------- DISPATCH PROGRAM ---------------- //
 
-        if(fuelClientState === 2) {
-            if(true) { // placeholder for role check
+        if (fuelClientState === 2) {
+            if (true) { // placeholder for role check
 
                 // jump communication
-                if(message.endsWith('j')) {
+                if (message.endsWith('j')) {
                     reply('roger.');
                 };
                 // =+ lexicon += //
@@ -206,7 +206,7 @@ client.on('message', function(user, userID, channelID, message, event) {
                 // debrief (debrief/db)
 
                 // disconnected (dc)
-                
+
                 // client in the exclusion zone (ez)
 
                 // friend requesting (fr+/fr-)
@@ -233,16 +233,16 @@ client.on('message', function(user, userID, channelID, message, event) {
         };
 
         if (true) { // placeholder for fueldude role check
-            if(message === "standby") {
+            if (message === "standby") {
                 reply(channelID, userID, dudeLogin(userID));
             };
 
-            if(message === ("offline")) {
+            if (message === ("offline")) {
                 reply(channelID, userID, dudeLogout(userID));
             };
         };
     };
-    
+
 
     // debugging commands, which will work on any channel
 
@@ -252,7 +252,7 @@ client.on('message', function(user, userID, channelID, message, event) {
 
     if (message.endsWith(" slice test")) {
         endSlice = message.lastIndexOf(" slice test");
-        statement = message.slice(0,endSlice);
+        statement = message.slice(0, endSlice);
         reply(channelID, userID, statement);
     }
 
