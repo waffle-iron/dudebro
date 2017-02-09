@@ -1,4 +1,6 @@
-console.log('\n\n==== dudebro v0.0.1 ====\n\n');
+// run count: 
+
+console.log('\n\n==== dudebro v0.0.1 build 6 ====\n\n');
 
 // bot constructor
 var Discord = require('discord.io');
