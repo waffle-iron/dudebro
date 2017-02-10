@@ -1,4 +1,13 @@
-console.log("======== dudebro v0.0.1 build 62 ========");
+var Config = require('config-js');
+devConf = true;
+
+if (devConf) {
+    var config = new Config('./config_dev.js');
+} else {
+    var config = new Config('./config.js');
+}
+
+console.log("======== dudebro v0.1.0 build 66 ========");
 
 /*
   A ping pong bot, whenever you send "ping", it replies "pong".
@@ -11,7 +20,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 // the token of your bot - https://discordapp.com/developers/applications/me
-const token = 'Mjc4Njc1ODk1OTE5ODM3MTg1.C35PYA.pEtvYLayyHQXmtpo5PEL_Fid2GU';
+const token = config.get('bot.token');
 
 // the ready event is vital, it means that your bot will only start reacting to
 // information from Discord _after_ ready is emitted.
