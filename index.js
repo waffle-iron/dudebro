@@ -22,6 +22,12 @@ const token = config.get('bot.token');
 // information from Discord _after_ ready is emitted.
 client.on('ready', () => {
     console.log('Connection to Discord established.');
+    client.user.setGame("available");
+    console.log('Status set to "available".');
+    client.user.setPresence({
+        status: "online",
+    });
+    console.log('Presence set.');
 });
 
 // ================ Custom Functions ================ //
