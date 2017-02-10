@@ -52,6 +52,13 @@ client.on('message', message => {
             //message.member.setRoles({ id: 278599947677466624, name: "Fuel Dudes" });
             //message.member.setRoles(role).catch(log.console);
             message.member.addRole(fuelDudes);
+            reply(message, "You are now registered as a **Fuel Dude**! Fly safe, commander. o7");
+        }
+
+        if (message.content === "/unregister") {
+            let fuelDudes = message.guild.roles.find("name", "Fuel Dudes");
+            message.member.removeRole(fuelDudes);
+            reply(message, "You are no longer registered as a Fuel Dude. We hope to have your assistance again soon.");
         }
 
         if (message.content === 'isRegisteredPilot()') {
