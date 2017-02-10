@@ -13,8 +13,8 @@ const client = new Discord.Client();
 // the token of your bot - https://discordapp.com/developers/applications/me
 const token = 'Mjc4Njc1ODk1OTE5ODM3MTg1.C35PYA.pEtvYLayyHQXmtpo5PEL_Fid2GU';
 
-// the ready event is vital, it means that your bot will only start reacting to information
-// from Discord _after_ ready is emitted.
+// the ready event is vital, it means that your bot will only start reacting to
+// information from Discord _after_ ready is emitted.
 client.on('ready', () => {
     console.log('Connection to Discord established.');
 });
@@ -49,8 +49,6 @@ client.on('message', message => {
 
         if (message.content === "/register") {
             let fuelDudes = message.guild.roles.find("name", "Fuel Dudes");
-            //message.member.setRoles({ id: 278599947677466624, name: "Fuel Dudes" });
-            //message.member.setRoles(role).catch(log.console);
             message.member.addRole(fuelDudes);
             reply(message, "You are now registered as a **Fuel Dude**! Fly safe, commander. o7");
         }
