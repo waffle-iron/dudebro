@@ -52,7 +52,7 @@ function reply(message, text) {
     try {
         message.channel.sendMessage('**<@!' + message.member.id + '>:** ' + text);
     } catch (error) {
-        message.channel.sendMessage("Whoops! That didn't work. Here's the error shenanigans:\n\n" + error + "\n\nCC <@!" + message.member.id + ">");
+        message.channel.sendMessage("Whoops! That didn't work. Here's the error shenanigans:\n\n" + error + "\n\nCC <@!" + config.get("bot.owner") + ">");
     }
 }
 
@@ -111,7 +111,7 @@ client.on('message', message => {
             console.log(editRole);
         }
     } catch (error) {
-        message.channel.sendMessage("Whoops! That didn't work. Here's the error shenanigans:\n\n" + error + "\n\nCC <@!" + message.member.id + ">");
+        message.channel.sendMessage("Whoops! That didn't work. Here's the error shenanigans:\n\n" + error + "\n\nCC <@!" + config.get("bot.owner") + ">");
     }
 });
 
