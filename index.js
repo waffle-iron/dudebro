@@ -9,10 +9,6 @@ if (devConf) {
 
 console.log("======== dudebro v0.1.0 build 66 ========");
 
-/*
-  A ping pong bot, whenever you send "ping", it replies "pong".
-*/
-
 // import the discord.js module
 const Discord = require('discord.js');
 
