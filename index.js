@@ -8,6 +8,7 @@ if (devConf) {
 }
 
 console.log("======== dudebro v0.1.0 build 66 ========");
+console.log("======== dudebro v0.1.0 build 71 ========");
 
 // import the discord.js module
 const Discord = require('discord.js');
