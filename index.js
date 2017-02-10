@@ -83,6 +83,10 @@ client.on('message', message => {
             reply(message, ":wave:");
             client.destroy();
         }
+
+        if (message.content === "testGreen()") {
+            message.guild.role
+        }
     } catch (error) {
         message.channel.sendMessage("Whoops! That didn't work. Here's the error shenanigans:\n\n" + error + "\n\nCC <@!" + message.member.id + ">");
     }
