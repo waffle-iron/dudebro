@@ -38,3 +38,5 @@ jspm_packages
 .vscode/settings.json
 
 test.js
+
+config_dev.js
