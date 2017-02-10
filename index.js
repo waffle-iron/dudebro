@@ -18,6 +18,20 @@ const client = new Discord.Client();
 // the token of your bot - https://discordapp.com/developers/applications/me
 const token = config.get('bot.token');
 
+// defining fueldudes variables
+var standbyList = []; // array that keeps track of pilots on duty. the bot uses
+                      // this array to contact available pilots that the bot can
+                      // directly request assistance from
+
+var fuelClientID = null; // id for the client reveiving assistance
+var fuelClientName = null; // CMDR name of the client
+var fuelClientSystem = null; // client's current system
+var fuelClientRealm = null; // client's platform (i.e. xbox)
+var fuelClientLifeSupport = null; // boolean determining whether the client is
+                                  // using life support oxygen
+var fuelClientSection = null; // unused variable
+var fuelClientState = null; // for reference: 1 == info collection, 2 == fueldude dispatch mode, 3 == debrief, null == reset
+
 // the ready event is vital, it means that your bot will only start reacting to
 // information from Discord _after_ ready is emitted.
 client.on('ready', () => {
