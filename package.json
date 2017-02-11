@@ -34,8 +34,7 @@
         "config-js": "1.1.9"
     },
     "devDependencies": {
-        "eslint": "*",
-        "jshint": "*"
+        "standard": "*"
     },
     "preferGlobal": false,
     "private": true,
