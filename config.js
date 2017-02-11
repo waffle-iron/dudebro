@@ -3,6 +3,7 @@ module.exports = {
     token: 'paste token between apostrophes',
     id: 'bots id',
     nick: 'display name',
+    offlineNick: 'offline display name'
     owner: 'your id',
     lexchan: 'fueldudes channel name',
     lexid: 'fueldudes channel id',

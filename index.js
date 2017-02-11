@@ -10,7 +10,7 @@ if (devConf) {
   config = new Config('./config.js')
 }
 
-console.log('======== dudebro v0.3.1 build 126 ========')
+console.log('======== dudebro v0.4.0 build 127 ========')
 
 // import the discord.js module
 const Discord = require('discord.js')
@@ -253,6 +253,7 @@ client.on('message', message => {
 
     if (message.content === 'logout()' && message.member.id === config.get('bot.owner')) {
       message.reply(':wave:')
+      message.guild.member(config.get('bot.id')).setNickname(config.get('bot.offlineNick'))
       client.destroy()
     }
 
