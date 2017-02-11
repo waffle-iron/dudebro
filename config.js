@@ -2,7 +2,7 @@ module.exports = {
   bot: {
     token: 'paste token between apostrophes',
     id: 'bots id',
-    nick: 'short for bot',
+    nick: 'display name',
     owner: 'your id',
     lexchan: 'fueldudes channel name',
     lexid: 'fueldudes channel id',
