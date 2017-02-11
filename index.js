@@ -10,7 +10,7 @@ if (devConf) {
   config = new Config('./config.js')
 }
 
-console.log('======== dudebro v0.3.0 build 121 ========')
+console.log('======== dudebro v0.3.1 build 126 ========')
 
 // import the discord.js module
 const Discord = require('discord.js')
@@ -133,31 +133,32 @@ client.on('message', message => {
           // info collection commands
 
           var invalidResponse = false
-          var response = message.content.toLowerCase()
+          var response = message.content
+          response = response.toLowerCase()
 
           // parse client responses
           if (fuelClientSection === 1) {
-            fuelClientName === message.content
+            fuelClientName = response
           } else if (fuelClientSection === 2) {
-            fuelClientSystem === response
+            fuelClientSystem = response
           } else if (fuelClientSection === 3) {
             if (response === 'pc' || response === 'xbox') { // || response === 'ps4'
-              fuelClientRealm === response
+              fuelClientRealm = response
             } else {
               message.channel.sendMessage('Valid responses are `PC` and `Xbox`. Please try again.')
-              invalidResponse === true
+              invalidResponse = true
             }
           } else if (fuelClientSection === 4) {
             if (response === 'yes' || response === 'no') {
-              fuelClientLifeSupport === response
+              fuelClientLifeSupport = response
             } else {
               message.channel.sendMessage('Valid responses are `yes` and `no`. Please try again.')
-              invalidResponse === true
+              invalidResponse = true
             }
           } else if (fuelClientSection === 5) {
             fuelClientIsConfirming = true
             if (response === '1' || response === '2' || response === '3' || response === '4') {
-              fuelClientSection === parseInt(response)
+              fuelClientSection = parseInt(response)
               invalidResponse = true // so fuelClientSection isn't set to 5
               message.channel.sendMessage(instructions(fuelClientSection))
             } else if (response === 'confirm') {
@@ -171,7 +172,7 @@ client.on('message', message => {
           // send a message with help text if the user gave a valid response.
           // the instructions are handled in the instructions() function.
           if (!invalidResponse) {
-            if (fuelClientIsConfirming && fuelClientSection < 6) fuelClientSection === 5
+            if (fuelClientIsConfirming && fuelClientSection < 6) fuelClientSection = 5
             if (!fuelClientIsConfirming) fuelClientSection++ // progresses
                                                              // client through
                                                              // the information
