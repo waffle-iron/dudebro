@@ -10,7 +10,7 @@ if (devConf) {
   config = new Config('./config.js')
 }
 
-console.log('======== dudebro v0.2.0 build 90 ========')
+console.log('======== dudebro v0.3.0 build 121 ========')
 
 // import the discord.js module
 const Discord = require('discord.js')
