@@ -51,8 +51,6 @@ var ripPick = 0 // keeps track of which part of the ripList has been used
 // information from Discord _after_ ready is emitted.
 client.on('ready', () => {
   console.log('Connection to Discord established.')
-  client.user.setGame('standing by')
-  console.log('Status set to "standing by".')
   client.user.setPresence({
     status: 'online'
   })
