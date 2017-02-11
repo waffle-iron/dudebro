@@ -56,6 +56,7 @@ client.on('ready', () => {
     afk: false
   })
   console.log('Presence set.')
+  client.guilds.get(config.get('bot.lexid')).member(config.get('bot.id')).setNickname('[STBY] ' + config.get('bot.nick'))
 })
 
 // ================ Custom Functions ================ //
