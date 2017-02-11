@@ -125,8 +125,8 @@ client.on('message', message => {
       message.reply('Check the console log for the roles and their IDs.')
     }
 
-    if (message.content === 'logout()' && message.user.id === config.get('bot.owner')) {
-      reply(message, ':wave:')
+    if (message.content === 'logout()' && message.member.id === config.get('bot.owner')) {
+      message.reply(':wave:')
       client.destroy()
     }
 
