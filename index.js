@@ -130,11 +130,6 @@ client.on('message', message => {
       client.destroy()
     }
 
-    if (message.content === 'testGreen()') {
-      var editRole = message.guild.roles.findKey('Fuel Dudes')
-      console.log(message.guild.roles.get('Fuel Dudes'))
-    }
-
     if (message.content === 'rip') {
       message.delete()
       message.channel.sendMessage('rest in ' + ripList[ripPick])
