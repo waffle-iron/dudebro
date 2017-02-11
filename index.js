@@ -52,7 +52,8 @@ var ripPick = 0 // keeps track of which part of the ripList has been used
 client.on('ready', () => {
   console.log('Connection to Discord established.')
   client.user.setPresence({
-    status: 'online'
+    status: 'online',
+    afk: false
   })
   console.log('Presence set.')
 })
