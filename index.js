@@ -92,7 +92,7 @@ client.on('message', message => {
         if (message.content === '!register') {
           let fuelDudes = message.guild.roles.find('name', 'Fuel Dudes')
           message.member.addRole(fuelDudes)
-          reply(message, 'You are now registered as a **Fuel Dude**! Fly safe, commander. o7')
+          message.reply('You are now registered as a **Fuel Dude**! Fly safe, commander. o7')
         }
       }
 
@@ -109,7 +109,7 @@ client.on('message', message => {
         if (message.content === '!unregister') {
           let fuelDudes = message.guild.roles.find('name', 'Fuel Dudes')
           message.member.removeRole(fuelDudes)
-          reply(message, 'You are no longer registered as a Fuel Dude. We hope to have your assistance again soon.')
+          message.reply('You are no longer registered as a Fuel Dude. We hope to have your assistance again soon.')
         }
       }
     }
@@ -122,13 +122,7 @@ client.on('message', message => {
 
     if (message.content === 'roleID()') {
       console.log(message.guild.roles)
-      reply(message, 'Check the console log for the roles and their IDs.')
-    }
-
-    if (message.content === 'isRegisteredPilot()') {
-      var registered = message.member.roles.exists('name', 'Fuel Dudes')
-      if (registered) reply(message, 'You are registered as a Fuel Dude pilot! :smile:')
-      if (!registered) reply(message, 'You are not registered as a Fuel Dude pilot. :frowning2:')
+      message.reply('Check the console log for the roles and their IDs.')
     }
 
     if (message.content === 'logout()' && message.user.id === config.get('bot.owner')) {
