@@ -71,6 +71,16 @@ function resetState () {
   fuelClientState = 0
 }
 
+function instructions (instructionSet) {
+  if (instructionSet === 1) return 'What is your in-game name?'
+  if (instructionSet === 2) return 'Which system are you located in?'
+  // if (instructionSet === 3) return 'Which platform do you use? `PC`, `Xbox`, and `PS4` are valid answers.'
+  if (instructionSet === 3) return 'Which platform do you use? `PC` and `Xbox` are valid answers.'
+  if (instructionSet === 4) return 'Are you using reserve oxygen (blue timer in the top right)? `yes` and `no` are valid answers.'
+  if (instructionSet === 5) return 'Below is the information that I have collected from you.\n```\n(1) Name: ' + fuelClientName + '\n(2) System: ' + fuelClientSystem + '\n(3) Platform: ' + fuelClientRealm + '\n(4) Using O2 reserve: ' + fuelClientLifeSupport + '\n```\n**If you need to correct any of this information, respond with the corresponding number. Otherwise, respond with `confirm`.**\nOnce you `confirm`, you will not be able to `cancel` fuel rescue through me.\n\nDEBUGGING: `cancel()` will let you cancel if you `confirm`.'
+  if (instructionSet === 6) return '\n\n**DUDELERT**\n```\n(1) Name: ' + fuelClientName + '\n(2) System: ' + fuelClientSystem + '\n(3) Platform: ' + fuelClientRealm + '\n(4) Using O2 reserve: ' + fuelClientLifeSupport + '\n```\n**DUDELERT**'
+}
+
 // =============== Bot Event Listener =============== //
 
 // create an event listener for messages
@@ -82,9 +92,12 @@ client.on('message', message => {
     // These commands are limited to the #fueldudes channel.
 
       if (!message.member.roles.findKey('name', 'Fuel Dudes')) {
+        // commands specific for users *without* the Fuel Dudes role
+
         /**
           * Register as a Fuel Dude. Registering will add the Fuel Dude role to
-          * your Discord account, and Dispatcher Bot will be able to mention you with the role.
+          * your Discord account, and Dispatcher Bot will be able to mention you
+          * with the role.
           *
           * @name !register
           * @see !unregister
@@ -111,6 +124,118 @@ client.on('message', message => {
           message.member.removeRole(fuelDudes)
           message.reply('You are no longer registered as a Fuel Dude. We hope to have your assistance again soon.')
         }
+      }
+
+      if (fuelClientState !== null) {
+        // commands and lexicon specific for fuel rescues
+
+        if (message.member.id === fuelClientID && fuelClientState === 1) {
+          // info collection commands
+
+          var invalidResponse = false
+          var response = message.content.toLowerCase()
+
+          // parse client responses
+          if (fuelClientSection === 1) {
+            fuelClientName === message.content
+          } else if (fuelClientSection === 2) {
+            fuelClientSystem === response
+          } else if (fuelClientSection === 3) {
+            if (response === 'pc' || response === 'xbox') { // || response === 'ps4'
+              fuelClientRealm === response
+            } else {
+              message.channel.sendMessage('Valid responses are `PC` and `Xbox`. Please try again.')
+              invalidResponse === true
+            }
+          } else if (fuelClientSection === 4) {
+            if (response === 'yes' || response === 'no') {
+              fuelClientLifeSupport === response
+            } else {
+              message.channel.sendMessage('Valid responses are `yes` and `no`. Please try again.')
+              invalidResponse === true
+            }
+          } else if (fuelClientSection === 5) {
+            fuelClientIsConfirming = true
+            if (response === '1' || response === '2' || response === '3' || response === '4') {
+              fuelClientSection === parseInt(response)
+              invalidResponse = true // so fuelClientSection isn't set to 5
+              message.channel.sendMessage(instructions(fuelClientSection))
+            } else if (response === 'confirm') {
+              fuelClientState = 2
+              fuelClientSection = 6
+            } else {
+              invalidResponse = true
+            }
+          }
+
+          // send a message with help text if the user gave a valid response.
+          // the instructions are handled in the instructions() function.
+          if (!invalidResponse) {
+            if (fuelClientIsConfirming && fuelClientSection < 6) fuelClientSection === 5
+            if (!fuelClientIsConfirming) fuelClientSection++ // progresses
+                                                             // client through
+                                                             // the information
+                                                             // collection
+                                                             // process.
+            if (fuelClientSection < 6) message.channel.sendMessage(instructions(fuelClientSection))
+            if (fuelClientSection === 6) message.channel.sendMessage('<@&' + message.guild.roles.find('name', 'Fuel Dudes').id + '> ' + instructions(fuelClientSection))
+          }
+
+          /**
+           * Clients have the ability to cancel fuel rescues before they accept
+           * their info as correct. There are many reasons why a client would
+           * want to cancel their rescue, and we provide this option so that our
+           * fuel dudes aren't bothered with empty rescue requests.
+           *
+           * @name cancel
+           * @see help
+           */
+          if (message.content === 'cancel') {
+            console.log('Client cancelled their rescue request. Going ahead with cancellation debriefing now...')
+            message.reply('Okay, I have cancelled your fuel request. If this was a mistake or you want to try again, respond with `init`.')
+            client.user.setPresence({
+              status: 'online',
+              afk: false
+            })
+            console.log('Presense set to online')
+            message.guild.member(config.get('bot.id')).setNickname('[STBY] ' + config.get('bot.nick'))
+            console.log('Status set to standby')
+            resetState()
+            console.log('State reset')
+            console.log('Cancellation debriefing complete')
+          }
+        }
+      }
+
+      /**
+       * This is the distress call. When a user sends this as a message in the
+       * #fueldudes channel, the bot will switch to mode 1 (info collection) and
+       * proceed to ask the user a few questions.
+       *
+       * @name help
+       * @see cancel
+       */
+      if (message.content === 'help' && fuelClientID === null || message.content === 'init' && fuelClientID === null) {
+        // change bot presence to show busy with a client
+        console.log('I have received a fuel rescue request from @' + message.member.nickname + ' (' + message.member.id + ')')
+        message.guild.member(config.get('bot.id')).setNickname('[DISP] ' + config.get('bot.nick'))
+        console.log('Status set to dispatching')
+        message.channel.sendMessage('Hey there, <@!' + message.member.id + '>! Let\'s get you out of trouble.')
+        client.user.setPresence({
+          status: 'idle',
+          afk: true
+        })
+        console.log('Presence set to DND')
+
+        // save client ID so that the bot only interacts with the client. this
+        // will reduce the chance of troll interference.
+        fuelClientID = message.member.id
+        console.log('Client: ' + fuelClientID)
+        fuelClientState = 1
+        console.log('STATE UPDATE: Info Collection')
+        fuelClientSection = 1
+        console.log('Enabled section 1')
+        message.channel.sendMessage(instructions(fuelClientSection))
       }
     }
 
