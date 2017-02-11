@@ -32,7 +32,13 @@ var fuelClientSystem = null      // client's current system
 var fuelClientRealm = null       // client's platform (i.e. xbox)
 var fuelClientLifeSupport = null // boolean determining whether the client is
                                  // using life support oxygen
-var fuelClientSection = null     // unused variable
+var fuelClientSection = null     // SECTION LIST:
+                                 // 1 === in-game name
+                                 // 2 === system name
+                                 // 3 === platform
+                                 // 4 === life support
+                                 // 5 === confirm
+var fuelClientIsConfirming = null
 var fuelClientState = 0          // for reference: 1 == info collection,
                                  // 2 == fueldude dispatch mode, 0 == standby
 
