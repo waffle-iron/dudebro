@@ -34,7 +34,8 @@
         "config-js": "1.1.9"
     },
     "devDependencies": {
-        "standard": "*"
+        "standard": "*",
+        "jsdoc": "*"
     },
     "preferGlobal": false,
     "private": true,
