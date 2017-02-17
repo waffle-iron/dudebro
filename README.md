@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/SPACE-DUDES/dudebro.png?label=ready&title=Ready)](https://waffle.io/SPACE-DUDES/dudebro)
 ![Image](https://github.com/melozh/assets/raw/master/pool/d/dudebro.png)
 
 ![Build](https://img.shields.io/badge/build-passing-green.svg)
