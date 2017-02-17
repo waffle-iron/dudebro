@@ -1,2 +1,2 @@
-FROM node:6-onbuild
+FROM node:6.9.5-alpine
 EXPOSE 443
